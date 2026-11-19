@@ -670,6 +670,7 @@ test("unknown and discovered adapters fail closed (regression)", async () => {
 // ── Validation revision (#864) ────────────────────────────────────────────────
 
 test("every validation result carries the validation revision, on success and failure", () => {
+  assert.equal(CONTENT_VALIDATION_REVISION, 1);
   const ok = validateResearchContent(makeSuccess("<p>BTC closed at 64,000</p>"));
   assert.equal(ok.usable, true);
   assert.equal(ok.validationRevision, CONTENT_VALIDATION_REVISION);
@@ -686,5 +687,5 @@ test("a cached capture is judged stale by its original capture time, not the rep
     { maxAgeSeconds: 3_600 },
   );
   assert.equal(r.state, "stale");
-  assert.equal(r.validationRevision, CONTENT_VALIDATION_REVISION);
+  assert.equal(r.validationRevision, 1);
 });
