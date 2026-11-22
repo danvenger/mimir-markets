@@ -96,7 +96,12 @@ export interface FetchSuccess {
   contentType: string;
   body: string;
   contentHash: string;
+  /** Original acquisition time; a cache replay keeps it (see `servedAt`). */
   capturedAt: number;
+  /** When the gateway handed this result out; later than `capturedAt` on a cache replay. */
+  servedAt?: number;
+  /** `fetched` for a new network fetch, `cache` for a replay of an earlier capture. */
+  acquisition?: "fetched" | "cache";
   bytes: number;
   fromCache: boolean;
   redirects: number;
